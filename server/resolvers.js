@@ -1,6 +1,6 @@
 const resolvers ={
     Query:{
         welcome:()=>{
-            return"welcome to egg-med"
+            return"welcome to salle de sport project"
         }}}
          export default resolvers
