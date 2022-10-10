@@ -1,3 +1,4 @@
+
 const resolvers ={
     Query:{
         welcome:()=>{
