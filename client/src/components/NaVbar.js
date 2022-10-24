@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router'
 function Navbar() {
   const navigate=useNavigate();
   const navigateToSignInPage= ()=>{
-    navigate('/Login')
+    navigate('/login')
   }
     const [nav,setNav]=useState(false);
     const changeBackground =()=>{
@@ -32,7 +32,7 @@ window.addEventListener('scroll',changeBackground)
         <li><Link to='features' smooth={true} duration={1000}> Features</Link></li>
         <li><Link to='presentaion'smooth={true} duration={1000}> Offer</Link></li>
         <li><Link to='about' smooth={true} duration={1000}> About</Link></li>
-        <li><Link to={navigateToSignInPage}smooth={true} duration={1000} > SignIn</Link></li>
+        <li><a onClick={navigateToSignInPage} href > SignIn</a></li>
 
         </ul>  
       
