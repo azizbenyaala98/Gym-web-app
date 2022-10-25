@@ -2,7 +2,8 @@ import user from '../models/user.model';
 import { signToken } from '../helpers/auth';
 
 class UserService {
-  createAdminUser = async (userInput) => {
+  createAdminUser = async ({ userData }) => {
+    console.log('userInput', userData);
     const {
       email,
       firstname,
@@ -14,7 +15,7 @@ class UserService {
       phoneNumber,
       birthday,
       gender,
-    } = userInput;
+    } = userData;
 
     const newUser = await user.create({
       email,
@@ -27,7 +28,6 @@ class UserService {
       birthday,
       role: 'owner',
       gender,
-      city,
     });
 
     const token = signToken(newUser?._id, 'user');
@@ -75,6 +75,15 @@ class UserService {
     try {
       const userData = await user.findById(userId);
       return transformUser(userData);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getUsers = async () => {
+    try {
+      const userData = await user.find();
+      return userData;
     } catch (error) {
       throw error;
     }

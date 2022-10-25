@@ -9,6 +9,7 @@ const resolvers = {
     },
     ...coursResolvers.Query,
     ...salleResolvers.Query,
+    ...userResolvers.Query,
   },
   Mutation: {
     ...userResolvers.Mutation,
