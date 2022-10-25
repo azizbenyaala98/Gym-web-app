@@ -9,4 +9,9 @@ export default {
       return UserService.createAdminUser(args);
     },
   },
+  Query: {
+    users: () => {
+      return UserService.getUsers();
+    },
+  },
 };

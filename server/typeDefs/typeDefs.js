@@ -1,21 +1,16 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
-  type Query {
-    welcome: String
-    getCours: [Cours]
-    getCour(id: ID): Cours
-    getSalles: [Salle]
-    getSalle(id: ID): Salle
-  }
   type Cours {
     id: ID
     title: String
   }
+
   type Salle {
     id: ID
     title: String
   }
+
   type User {
     _id: ID!
     id: ID
@@ -68,6 +63,15 @@ const typeDefs = gql`
     updateSalle(id: ID, title: String): Salle
     login(email: String, password: String): AuthData
     signup(userData: UserInput!): AuthData
+  }
+
+  type Query {
+    welcome: String
+    getCours: [Cours]
+    getCour(id: ID): Cours
+    getSalles: [Salle]
+    getSalle(id: ID): Salle
+    users: [User]
   }
 `;
 export default typeDefs;
