@@ -1,6 +1,6 @@
-import bcrypt from "bcryptjs";
-import crypto from "crypto";
-import mongoose from "mongoose";
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
 
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: ['male', 'female'],
     },
     address: {
       type: String,
@@ -43,19 +43,18 @@ const userSchema = new mongoose.Schema(
 
     password: {
       type: String,
-      required: [true, "Please provide a password"],
+      required: [true, 'Please provide a password'],
       minlength: 8,
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, "Please confirm your password"],
+      required: [true, 'Please confirm your password'],
       validate: {
-
-        validator(this, el) {
+        validator: function (el) {
           return el === this.password;
         },
-        message: "Passwords are not the same!",
+        message: 'Passwords are not the same!',
       },
     },
     phoneNumber: {
@@ -66,7 +65,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["owner"],
+      enum: ['owner'],
       required: true,
     },
     passwordChangedAt: Date,
@@ -74,38 +73,35 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
     gym: {
       type: mongoose.Schema.Types.ObjectId,
-    }
+    },
   },
   {
     timestamps: true,
   }
 );
 
-userSchema.pre("save",
-  async function (next) {
-    // Only run this function if password was actually modified
-    if (!this.isModified("password")) {
-      return next();
-    }
+userSchema.pre('save', async function (next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password')) {
+    return next();
+  }
 
-    this.password = await bcrypt.hash(this.password, 12);
+  this.password = await bcrypt.hash(this.password, 12);
 
-    // Delete passwordConfirm field
-    this.passwordConfirm = undefined;
+  // Delete passwordConfirm field
+  this.passwordConfirm = undefined;
 
-    next();
-  });
+  next();
+});
 
-userSchema.pre
-  ("save",
-  function (next) {
-    if (!this.isModified("password") || this.isNew) {
-      return next();
-    }
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) {
+    return next();
+  }
 
-    this.passwordChangedAt = Date.now() - 1000;
-    next();
-  });
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
 
 userSchema.methods.correctPassword = async (
   candidatePassword,
@@ -114,10 +110,7 @@ userSchema.methods.correctPassword = async (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.changedPasswordAfter = function (
-  this,
-  JWTTimestamp
-) {
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const time = this.passwordChangedAt.getTime();
     const changedTimestamp = Math.floor(time / 1000);
@@ -130,15 +123,15 @@ userSchema.methods.changedPasswordAfter = function (
 };
 
 userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(resetToken)
-    .digest("hex");
+    .digest('hex');
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 60 * 240;
 
   return resetToken;
 };
-export default mongoose.model("User", userSchema);
+export default mongoose.model('User', userSchema);
