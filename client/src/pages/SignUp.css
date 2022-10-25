@@ -6,7 +6,7 @@
 	box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-.body 
+.boody 
 {
 	display: flex;
 	justify-content: center;
@@ -18,8 +18,8 @@
 .box 
 {
 	position: relative;
-	width: 380px;
-	height: 420px;
+	width: 840px;
+	height: 680px;
 	background: #1c1c1c;
 	border-radius: 8px;
 	overflow: hidden;
@@ -31,8 +31,8 @@
 	position: absolute;
 	top: -50%;
 	left: -50%;
-	width: 380px;
-	height: 420px;
+	width: 900px;
+	height: 600px;
 	transform-origin: bottom right;
 	background: linear-gradient(0deg,transparent,#ff1414,#ff1414);
 	animation: animate 6s linear infinite;
@@ -44,8 +44,8 @@
 	position: absolute;
 	top: -50%;
 	left: -50%;
-	width: 380px;
-	height: 420px;
+	width: 900px;
+	height: 600px;
 	transform-origin: bottom right;
 	background: linear-gradient(0deg,transparent,#ff1414,#ff1414);
 	animation: animate 6s linear infinite;
@@ -168,6 +168,11 @@ input[type="submit"]
 	margin-top: 10px;
 }
 input[type="submit"]:active 
-{
-	opacity: 0.8;
+{   opacity: 0.8;
 }
+.right{
+    position: absolute;
+    top :85px;
+     right: 50px;
+}
+
