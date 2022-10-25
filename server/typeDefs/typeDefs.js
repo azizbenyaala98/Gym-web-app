@@ -3,8 +3,14 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
   type Query {
     welcome: String
+    getCours: [Cours]
+    getCour(id: ID): Cours
     getSalles: [Salle]
     getSalle(id: ID): Salle
+  }
+  type Cours {
+    id: ID
+    title: String
   }
   type Salle {
     id: ID
@@ -54,6 +60,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addCours(title: String): Cours
+    deleteCours(id: ID): String
+    updateCours(id: ID, title: String): Cours
     addSalle(title: String): Salle
     deleteSalle(id: ID): String
     updateSalle(id: ID, title: String): Salle
