@@ -1,10 +1,14 @@
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import typeDefs from './typeDefs/typeDefs.js';
-import resolvers from './resolvers/resolvers.js';
 import mongoose from 'mongoose';
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import http from 'http';
+import bodyParser from 'body-parser';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import typeDefs from './typeDefs/typeDefs.js';
+import resolvers from './resolvers/resolvers.js';
 
 async function connect() {
   try {
@@ -21,17 +25,37 @@ async function connect() {
 }
 
 async function initServer() {
-  const app = express();
-  app.use(cors());
   dotenv.config();
-  connect();
-  const apolloServer = new ApolloServer({ typeDefs, resolvers });
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app });
-  app.use((req, res) => {
-    res.send('server started successfully');
-  });
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+  const app = express();
+  // Our httpServer handles incoming requests to our Express app.
+  // Below, we tell Apollo Server to "drain" this httpServer,
+  // enabling our servers to shut down gracefully.
+  const httpServer = http.createServer(app);
+  connect();
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+  // Ensure we wait for our server to start
+  await server.start();
+
+  // Set up our Express middleware to handle CORS, body parsing,
+  // and our expressMiddleware function.
+  app.use(
+    '/',
+    cors(),
+    bodyParser.json(),
+    // expressMiddleware accepts the same arguments:
+    // an Apollo Server instance and optional configuration options
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ token: req.headers.token }),
+    })
+  );
+
+  // Modified server startup
+  await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
+  console.log(`🚀 Server ready at http://localhost:${PORT}/`);
 }
 initServer();
