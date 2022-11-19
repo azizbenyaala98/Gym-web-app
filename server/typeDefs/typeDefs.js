@@ -48,7 +48,7 @@ const typeDefs = gql`
     phoneNumber: String
     birthday: String
     city: String
-    username: String
+    username: String!
     address: String
     phone: String
     about: String
