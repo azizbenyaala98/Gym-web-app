@@ -57,7 +57,7 @@ class UserService {
     }
     let token;
 
-    token = signToken(userData._id, 'user');
+    token = signToken(userData._id, userData.role);
 
     const correct = await userData.correctPassword(password, userData.password);
     if (!userData || !correct) {
