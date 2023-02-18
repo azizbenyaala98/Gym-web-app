@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function Salles() {
   return (
     <div>
       <p>this is salles </p>
     </div>
-  )
+  );
 }
 
-export default Salles
+export default Salles;

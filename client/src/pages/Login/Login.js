@@ -1,38 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import "./login.css";
-import { useState } from "react";
-import { useLogin } from "../../API/Auth/requests";
-import { useNavigate } from "react-router-dom";
+import './login.css';
+import { useState } from 'react';
+import { useLogin } from '../../API/Auth/requests';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [login, { loading, error, data }] = useLogin();
 
   useEffect(() => {
-    const isConnected = localStorage.getItem("isConnected");
+    const isConnected = localStorage.getItem('isConnected');
     if (isConnected) {
-      navigate("/dashboard");
+      navigate('/users');
     }
   }, []);
 
   if (loading) return <p>Loading...</p>;
 
-  const url = "https://www.google.com/";
+  const url = 'https://www.google.com/';
   console.log(data, error, loading);
   async function handleLogin() {
     try {
       const result = await login({ variables: { email, password } }).catch(
         () => {
-          console.log("error");
+          console.log('error');
         }
       );
       if (result && result.data) {
-        localStorage.setItem("isConnected", true);
-        navigate("/dashboard");
+        localStorage.setItem('isConnected', true);
+        navigate('/dashboard');
       }
     } catch (e) {
       console.error(e);
@@ -63,8 +63,8 @@ const Login = () => {
             <span>Password</span>
             <i></i>
           </div>
-          <p style={{ color: "red", marginTop: "10px" }}>
-            {error?.message || ""}
+          <p style={{ color: 'red', marginTop: '10px' }}>
+            {error?.message || ''}
           </p>
           <div className="links">
             <a href={url}>Forgot Password ?</a>
