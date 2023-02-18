@@ -2,6 +2,9 @@ import user from '../models/user.model';
 import { signToken } from '../helpers/auth';
 
 class UserService {
+  async deleteUser(userId) {
+    return user.findByIdAndDelete(userId);
+  }
   createAdminUser = async ({ userData }) => {
     console.log('userInput', userData);
     const {
@@ -38,7 +41,7 @@ class UserService {
     };
   };
 
-  editUser = async (userInput, userId) => {
+  editUser = async (userId, userInput) => {
     const editedUser = await user.findByIdAndUpdate(userId, userInput, {
       new: true,
     });
@@ -74,7 +77,7 @@ class UserService {
   getUserById = async (userId) => {
     try {
       const userData = await user.findById(userId);
-      return transformUser(userData);
+      return userData;
     } catch (error) {
       throw error;
     }
