@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import "./login.css";
 import { useState } from "react";
-import { useLogin } from "../API/Auth/requests";
+import { useLogin } from "../../API/Auth/requests";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

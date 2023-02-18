@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import "../pages/Landing.css";
+import '../pages/Landing/Landing.css'
 import { useNavigate } from "react-router";
 
 function Offer() {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSignup } from '../API/Auth/requests';
+import { useSignup } from '../../API/Auth/requests';
 import './SignUp.css';
 function SignUp() {
   const navigate = useNavigate();

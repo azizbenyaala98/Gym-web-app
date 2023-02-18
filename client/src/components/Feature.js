@@ -1,5 +1,5 @@
 import React from 'react';
-import '../pages/Landing.css';
+import '../pages/Landing/Landing.css'
 import FeatureBox from './FeatureBox';
 import fimage1 from '../assets/1.svg';
 import fimage2 from '../assets/2.svg';

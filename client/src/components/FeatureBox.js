@@ -1,5 +1,5 @@
 import React from 'react'
-import '../pages/Landing.css'
+import '../pages/Landing/Landing.css'
 
 function FeatureBox(props) {
   return (
