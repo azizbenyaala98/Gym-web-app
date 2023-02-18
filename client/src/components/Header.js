@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
 import { useNavigate } from "react-router";
-import "../pages/Landing.css";
+import '../pages/Landing/Landing.css'
 function Header() {
   const navigate = useNavigate();
   const navigateToSignUpPage = () => {
