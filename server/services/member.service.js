@@ -15,7 +15,8 @@ class MemberService {
     return this.model.create(args);
   }
   async deleteMember(memberId) {
-    return this.model.findByIdAndDelete(memberId);
+    await this.model.findByIdAndDelete(memberId);
+    return true;
   }
   async updateMember(id, updateDocument) {
     return this.model.findByIdAndUpdate(id, updateDocument, {

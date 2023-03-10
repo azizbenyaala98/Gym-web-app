@@ -3,7 +3,8 @@ import { signToken } from '../helpers/auth';
 
 class UserService {
   async deleteUser(userId) {
-    return user.findByIdAndDelete(userId);
+    await user.findByIdAndDelete(userId);
+    return true;
   }
   createAdminUser = async ({ userData }) => {
     console.log('userInput', userData);

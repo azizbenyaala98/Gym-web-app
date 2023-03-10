@@ -11,6 +11,7 @@ import Salles from './pages/Salle/Salles';
 import User from './pages/User';
 import Members from './pages/Members';
 import MemberAdd from './pages/MemberAdd';
+import Member from './pages/Member';
 
 function App() {
   return (
@@ -25,6 +26,14 @@ function App() {
           element={
             <Layout>
               <Salles />
+            </Layout>
+          }
+        />
+        <Route
+          path="/members/:id/update"
+          element={
+            <Layout>
+              <Member />
             </Layout>
           }
         />

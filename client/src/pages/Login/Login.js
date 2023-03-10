@@ -32,7 +32,7 @@ const Login = () => {
       );
       if (result && result.data) {
         localStorage.setItem('isConnected', true);
-        navigate('/dashboard');
+        navigate('/users');
       }
     } catch (e) {
       console.error(e);

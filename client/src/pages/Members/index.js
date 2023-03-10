@@ -3,6 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useList } from '../../hooks/useCrud';
+import Wrapper from '../../components/Wrapper';
 
 const GET_ALL_MEMBERS_QUERY = gql`
   query getAllMembers {
@@ -16,73 +18,39 @@ const GET_ALL_MEMBERS_QUERY = gql`
   }
 `;
 
-const DELETE_USER_MUTATION = gql`
-  mutation DeleteUser($id: ID!) {
-    deleteUser(id: $id)
+const DELETE_MEMBER_MUTATION = gql`
+  mutation DeleteMember($id: ID!) {
+    deleteMember(id: $id)
   }
 `;
 
 function Members() {
-  const { data, loading, error } = useQuery(GET_ALL_MEMBERS_QUERY);
-  // const [deleteUserOperation] = useMutation(DELETE_USER_MUTATION, {
-  //   refetchQueries: [{ query: GET_ALL_USERS_QUERY }],
-  // });
-
-  // function handleDeleteUser(id) {
-  //   deleteUserOperation({
-  //     variables: {
-  //       id,
-  //     },
-  //   });
-  // }
-
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'fullname', headerName: 'Full name', width: 200 },
-    {
-      field: 'birthday',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
-      renderCell: ({ value }) => {
-        return new Date(value).toDateString();
+  const { headerElements, loading, error, tableRenderer } = useList({
+    deleteMutation: DELETE_MEMBER_MUTATION,
+    getMutation: GET_ALL_MEMBERS_QUERY,
+    queryName: 'getAllMembers',
+    columns: [
+      { field: 'id', headerName: 'ID', width: 200 },
+      { field: 'fullname', headerName: 'Full name', width: 200 },
+      {
+        field: 'birthday',
+        headerName: 'Age',
+        type: 'number',
+        width: 90,
+        renderCell: ({ value }) => {
+          return new Date(value).toDateString();
+        },
       },
-    },
-    {
-      field: 'edit',
-      headerName: 'Edit',
-      width: 90,
-      renderCell: ({ row }) => {
-        return <Link to={`${row.id}/update`}>Edit</Link>;
-      },
-    },
-    // {
-    //   field: 'delete',
-    //   headerName: 'Edit',
-    //   width: 90,
-    //   renderCell: ({ row }) => {
-    //     return (
-    //       <Button onClick={() => handleDeleteUser(row.id)}>Delete </Button>
-    //     );
-    //   },
-    // },
-  ];
-  if (error) return <div>Error</div>;
-  if (loading) return <div>loading</div>;
+    ],
+  });
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <Button>
-        <Link to="/members/add">Add</Link>{' '}
-      </Button>
-      <DataGrid
-        rows={data.getAllMembers}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+    <Wrapper loading={loading} error={error}>
+      <div style={{ height: 400, width: '100%' }}>
+        {headerElements}
+        {tableRenderer}
+      </div>
+    </Wrapper>
   );
 }
 
