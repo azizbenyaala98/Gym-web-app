@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
-import Input from '../../components/Input';
-import { Button } from '@mui/material';
-import { gql, useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { gql } from '@apollo/client';
 import useAdd from '../../hooks/useAdd';
-
-const fields = ['email', 'fullname', 'gender', 'birthday'];
 
 const ADD_MEMBER_MUTATION = gql`
   mutation AddMember($memberData: MemberInput!) {

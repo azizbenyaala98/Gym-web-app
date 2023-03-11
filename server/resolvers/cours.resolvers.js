@@ -2,23 +2,24 @@ import CoursService from '../services/cours.service.js';
 
 export default {
   Mutation: {
-    addCours: (_, args) => {
-      return CoursService.addCours(args);
+    addCours: (_, { document }) => {
+      return CoursService.addCours(document);
     },
-    deleteCours: (_, args) => {
-      return CoursService.deleteCours(args);
+    deleteCours: (_, { id }) => {
+      return CoursService.deleteCours(id);
     },
 
-    updateCours: (_, args) => {
-      return CoursService.updateCours(args);
+    updateCours: (_, { id, document }) => {
+      return CoursService.updateCours(id, document);
     },
   },
   Query: {
     getCours: () => {
       return CoursService.getCours();
     },
-    getCours: (_, args) => {
-      return CoursService.getCours(args);
+    getCour: (_, { id }) => {
+      console.log('id', id);
+      return CoursService.getCour(id);
     },
   },
 };

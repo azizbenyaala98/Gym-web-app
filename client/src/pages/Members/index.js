@@ -29,6 +29,7 @@ function Members() {
     deleteMutation: DELETE_MEMBER_MUTATION,
     getMutation: GET_ALL_MEMBERS_QUERY,
     queryName: 'getAllMembers',
+    addPath: '/members/add',
     columns: [
       { field: 'id', headerName: 'ID', width: 200 },
       { field: 'fullname', headerName: 'Full name', width: 200 },
@@ -47,6 +48,7 @@ function Members() {
   return (
     <Wrapper loading={loading} error={error}>
       <div style={{ height: 400, width: '100%' }}>
+        Members
         {headerElements}
         {tableRenderer}
       </div>

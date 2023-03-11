@@ -1,35 +1,34 @@
 import Cours from '../models/cours.model.js';
 
 class CoursService {
-  getCours = async () => {
-    const Cours = await Cours.find();
-    return Cours;
-  };
-  getCours = async (args) => {
-    const Cours = await Cours.findById(args.id);
-    return Cours;
-  };
+  async getCours() {
+    const result = await Cours.find();
+    console.log('Courses', result);
+    return result;
+  }
 
-  addCours = async (args) => {
-    const newCours = new Cours({ title: args.title });
+  async getCour(id) {
+    const result = await Cours.findById(id);
+    return result;
+  }
+
+  async addCours(args) {
+    const newCours = new Cours(args);
     await newCours.save();
     return newCours;
-  };
-  deleteCours = async (args) => {
-    await Cours.findByIdAndDelete(args.id);
-    return 'Cours deleted successsfully';
-  };
-  updateCours = async ({ id, title }) => {
-    const updatedCours = {};
-    if (title != undefined) {
-      updatedCours.title = title;
-    }
+  }
 
-    const Cours = await Cours.findByIdAndUpdate(id, updatedProduct, {
+  async deleteCours(id) {
+    await Cours.findByIdAndDelete(id);
+    return true;
+  }
+
+  async updateCours(id, doc) {
+    const result = await Cours.findByIdAndUpdate(id, doc, {
       new: true,
     });
-    return Cours;
-  };
+    return result;
+  }
 }
 
-export default CoursService;
+export default new CoursService();

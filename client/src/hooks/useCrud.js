@@ -4,7 +4,13 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 
-export function useList({ deleteMutation, getMutation, columns, queryName }) {
+export function useList({
+  deleteMutation,
+  getMutation,
+  columns,
+  queryName,
+  addPath,
+}) {
   const { data, loading, error, refetch } = useQuery(getMutation);
   const [deleteOperation, { loading: mutationLoading }] = useMutation(
     deleteMutation,
@@ -53,7 +59,7 @@ export function useList({ deleteMutation, getMutation, columns, queryName }) {
     <div>
       <Button onClick={() => refetch()}>Refresh</Button>
       <Button>
-        <Link to="/members/add">Add</Link>{' '}
+        <Link to={addPath}>Add</Link>{' '}
       </Button>
     </div>
   );

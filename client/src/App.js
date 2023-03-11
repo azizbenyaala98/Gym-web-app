@@ -12,6 +12,17 @@ import User from './pages/User';
 import Members from './pages/Members';
 import MemberAdd from './pages/MemberAdd';
 import Member from './pages/Member';
+import Course from './pages/Course';
+import CourseAdd from './pages/CourseAdd';
+import SalleUpdate from './pages/SalleUpdate';
+import AddSalle from './pages/AddSalle';
+import ProductsShow from './pages/ProductsShow';
+import Navbar from './components/NaVbar';
+import Cart from './pages/Cart';
+import Products from './pages/Products';
+import ProductAdd from './pages/ProductAdd';
+import Coaches from './pages/Coaches';
+import CoachAdd from './pages/ChoachAdd';
 
 function App() {
   return (
@@ -19,8 +30,90 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
 
+        <Route
+          path="/coaches/add"
+          element={
+            <Layout>
+              <CoachAdd />
+            </Layout>
+          }
+        />
+        <Route
+          path="/coaches"
+          element={
+            <Layout>
+              <Coaches />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/shop/products"
+          element={
+            <div
+              style={{
+                background: 'black',
+                height: '100%',
+                minHeight: '100vh',
+              }}
+            >
+              <Navbar isPage />
+
+              <ProductsShow />
+            </div>
+          }
+        />
+        <Route
+          path="/products/add"
+          element={
+            <Layout>
+              <ProductAdd />
+            </Layout>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <Layout>
+              <Products />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <div
+              style={{
+                background: 'black',
+                height: '100%',
+                minHeight: '100vh',
+              }}
+            >
+              <Navbar isPage />
+
+              <Cart />
+            </div>
+          }
+        />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/salles/add"
+          element={
+            <Layout>
+              <AddSalle />
+            </Layout>
+          }
+        />
+        <Route
+          path="/salles/:id/update"
+          element={
+            <Layout>
+              <SalleUpdate />
+            </Layout>
+          }
+        />
         <Route
           path="/salles"
           element={
@@ -68,6 +161,23 @@ function App() {
           element={
             <Layout>
               <Users />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/cours/:id/update"
+          element={
+            <Layout>
+              <Course />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cours/add"
+          element={
+            <Layout>
+              <CourseAdd />
             </Layout>
           }
         />

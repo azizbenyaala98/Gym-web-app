@@ -46,6 +46,7 @@ function Users() {
 
   return (
     <Wrapper loading={loading} error={error}>
+      Users
       <div style={{ height: 400, width: '100%' }}>
         {headerElements}
         {tableRenderer}

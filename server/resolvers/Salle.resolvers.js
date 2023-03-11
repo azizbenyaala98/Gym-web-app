@@ -1,24 +1,6 @@
-import SalleService from '../services/Salle.service.js';
+import salleService from '../services/salle.service';
+import { createResolver } from './common.resolver';
 
-export default {
-  Mutation: {
-    addSalle: (_, args) => {
-      return SalleService.addSalle(args);
-    },
-    deleteSalle: (_, args) => {
-      return SalleService.deleteSalle(args);
-    },
+const resolvers = createResolver(salleService, 'Salle');
 
-    updateSalle: (_, args) => {
-      return SalleService.updateSalle(args);
-    },
-  },
-  Query: {
-    getSalles: () => {
-      return SalleService.getsalles();
-    },
-    getSalle: (_, args) => {
-      return SalleService.getsalle(args);
-    },
-  },
-};
+export default resolvers;

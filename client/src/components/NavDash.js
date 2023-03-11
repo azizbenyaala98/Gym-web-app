@@ -183,6 +183,18 @@ export default function NavDash() {
                 <ListItemText> Members </ListItemText>
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate('/products')}>
+                <GroupIcon />
+                <ListItemText> Products </ListItemText>
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate('/coaches')}>
+                <GroupIcon />
+                <ListItemText> Coaches </ListItemText>
+              </ListItemButton>
+            </ListItem>
           </List>
         </Box>
       </Drawer>

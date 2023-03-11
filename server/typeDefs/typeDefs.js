@@ -1,16 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
-  type Cours {
-    id: ID
-    title: String
-  }
-
-  type Salle {
-    id: ID
-    title: String
-  }
-
+  # User
   type User {
     _id: ID!
     id: ID
@@ -54,16 +45,7 @@ const typeDefs = gql`
     address: String
     description: String
   }
-  input MemberInput {
-    email: String
-    fullname: String
-    birthday: String
-    gender: String
-    address: String
-    description: String
-    phoneNumber: String
-  }
-
+  # Member
   type MemberResult {
     _id: ID
     id: ID
@@ -76,13 +58,99 @@ const typeDefs = gql`
     phoneNumber: String
   }
 
+  input MemberInput {
+    email: String
+    fullname: String
+    birthday: String
+    gender: String
+    address: String
+    description: String
+    phoneNumber: String
+  }
+  # Course
+  type Cours {
+    id: ID
+    title: String
+  }
+  input CourseInput {
+    title: String
+  }
+  #Salle
+  type Salle {
+    id: ID
+    title: String
+  }
+
+  input SalleInput {
+    title: String
+  }
+
+  # Product
+  type Product {
+    id: ID
+    title: String
+    price: String
+    description: String
+    picture: String
+    loved: Int
+  }
+
+  input ProductInput {
+    title: String
+    price: String
+    description: String
+    picture: String
+    loved: Int
+  }
+
+  # Cart
+  type Cart {
+    id: ID
+    title: String
+    price: Float
+    description: String
+    picture: String
+    loved: Int
+  }
+
+  input CartInput {
+    title: String
+    price: String
+    description: String
+    picture: String
+    loved: Int
+  }
+
+  # Coach
+  type Coach {
+    id: ID
+    fullname: String
+    email: String
+    address: String
+    picture: String
+    specialty: String
+    available: Boolean
+  }
+
+  input CoachInput {
+    fullname: String
+    email: String
+    address: String
+    picture: String
+    specialty: String
+    available: Boolean
+  }
+
+  # Common
+
   type Mutation {
-    addCours(title: String): Cours
+    addCours(document: CourseInput): Cours
     deleteCours(id: ID): String
-    updateCours(id: ID, title: String): Cours
-    addSalle(title: String): Salle
+    updateCours(id: ID, document: CourseInput): Cours
+    #Salle
+    addSalle(document: SalleInput): Salle
     deleteSalle(id: ID): String
-    updateSalle(id: ID, title: String): Salle
+    updateSalle(id: ID, document: SalleInput): Salle
     #User
     login(email: String, password: String): AuthData
     signup(userData: UserInput!): AuthData
@@ -92,6 +160,19 @@ const typeDefs = gql`
     addMember(memberData: MemberInput!): MemberResult
     updateMember(id: ID!, document: MemberInput!): MemberResult
     deleteMember(id: ID!): Boolean
+    #Product
+    addProduct(document: ProductInput): Product
+    deleteProduct(id: ID): String
+    updateProduct(id: ID, document: ProductInput): Product
+    addLoveToProduct(id: ID): Product
+    #Cart
+    addCart(document: CartInput): Cart
+    deleteCart(id: ID): String
+    updateCart(id: ID, document: CartInput): Cart
+    #Coach
+    addCoach(document: CoachInput): Coach
+    deleteCoach(id: ID): String
+    updateCoach(id: ID, document: CoachInput): Coach
   }
 
   type Query {
@@ -106,6 +187,17 @@ const typeDefs = gql`
     # Member
     getAllMembers: [MemberResult]
     getMember(id: ID!): MemberResult
+
+    #Product
+    getProducts: [Product]
+    getProduct(id: ID): Product
+
+    #Cart
+    getCarts: [Cart]
+    getCart(id: ID): Cart
+    #Coach
+    getCoachs: [Coach]
+    getCoach(id: ID): Coach
   }
 `;
 export default typeDefs;
