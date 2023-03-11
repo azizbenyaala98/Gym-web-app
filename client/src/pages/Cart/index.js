@@ -53,15 +53,17 @@ export default function Cart() {
       <div style={{ margin: 50 }}>
         <h1 style={{ color: 'white', paddingTop: 100 }}>Welcome to cart</h1>
         <Grid container>
-          {items.map((product) => (
-            <Grid style={{ margin: 10 }}>
-              <ProductCard
-                deleteAction
-                handleDelete={handleDelete}
-                {...product}
-              />
-            </Grid>
-          ))}
+          {items
+            ? items.map((product) => (
+                <Grid style={{ margin: 10 }}>
+                  <ProductCard
+                    deleteAction
+                    handleDelete={handleDelete}
+                    {...product}
+                  />
+                </Grid>
+              ))
+            : 'Cart empty'}
         </Grid>
 
         <h1 style={{ color: 'white' }}>Total Price: {totalPrice}</h1>

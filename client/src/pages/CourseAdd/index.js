@@ -17,6 +17,7 @@ export default function CourseAdd() {
     pathBack: '/cours',
     fields: ['title'],
     variableName: 'document',
+    resourceType: 'course',
   });
   return <div>{rendrer}</div>;
 }

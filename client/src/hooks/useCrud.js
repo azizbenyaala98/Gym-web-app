@@ -56,15 +56,20 @@ export function useList({
   const list = (data && data[queryName]) || [];
 
   const headerElements = (
-    <div>
-      <Button onClick={() => refetch()}>Refresh</Button>
-      <Button>
-        <Link to={addPath}>Add</Link>{' '}
+    <div style={{ marginBottom: 10, marginTop: 10 }}>
+      <Button variant="outlined" onClick={() => refetch()}>
+        Refresh
+      </Button>
+      <Button style={{ color: 'white', marginLeft: 10 }} variant="contained">
+        <Link style={{ color: 'white' }} to={addPath}>
+          Add
+        </Link>{' '}
       </Button>
     </div>
   );
   const tableRenderer = (
     <DataGrid
+      style={{ marginRight: 10 }}
       rows={list}
       columns={[...columns, ...actions]}
       pageSize={list.length}

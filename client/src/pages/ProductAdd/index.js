@@ -16,6 +16,7 @@ export default function ProductAdd() {
     pathBack: '/products',
     fields: ['title', 'price', 'description', 'picture'],
     variableName: 'document',
+    resourceType: 'product',
   });
   return <div>{rendrer}</div>;
 }

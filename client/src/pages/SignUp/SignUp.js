@@ -33,7 +33,7 @@ function SignUp() {
       console.log('result', result);
       if (result && result.data) {
         localStorage.setItem('isConnected', true);
-        navigate('/dashboard');
+        navigate('/users');
       }
     } catch (e) {}
   }
@@ -106,7 +106,7 @@ function SignUp() {
             </div>
             <div className="inputBox">
               <input
-                name="phone"
+                name="phoneNumber"
                 onChange={handleForm}
                 type="text"
                 required="required"

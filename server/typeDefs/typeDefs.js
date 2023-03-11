@@ -28,6 +28,26 @@ const typeDefs = gql`
     tokenExpiration: String!
   }
 
+  input UserInputSignup {
+    email: String
+    firstname: String
+    middlename: String
+    username: String
+    lastname: String
+    createdAt: String
+    updatedAt: String
+    role: String
+    picture: String
+    country: String
+    phoneNumber: String
+    birthday: String
+    gender: String
+    address: String
+    description: String
+    password: String
+    passwordConfirm: String
+  }
+
   input UserInput {
     email: String
     firstname: String
@@ -153,7 +173,7 @@ const typeDefs = gql`
     updateSalle(id: ID, document: SalleInput): Salle
     #User
     login(email: String, password: String): AuthData
-    signup(userData: UserInput!): AuthData
+    signup(userData: UserInputSignup!): AuthData
     updateUser(id: ID!, document: UserInput): User
     deleteUser(id: ID!): Boolean
     #Member mutations

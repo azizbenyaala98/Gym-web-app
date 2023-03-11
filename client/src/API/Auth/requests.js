@@ -18,7 +18,7 @@ export function useLogin() {
 }
 
 const Signup = gql`
-  mutation Mutation($userData: UserInput!) {
+  mutation Mutation($userData: UserInputSignup!) {
     signup(userData: $userData) {
       token
       user {

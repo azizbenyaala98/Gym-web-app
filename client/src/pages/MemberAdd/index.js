@@ -16,6 +16,7 @@ export default function MemberAdd() {
     pathBack: '/members',
     fields: ['email', 'fullname', 'gender', 'birthday'],
     variableName: 'memberData',
+    resourceType: 'member',
   });
   return <div>{rendrer}</div>;
 }

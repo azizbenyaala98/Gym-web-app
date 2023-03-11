@@ -17,6 +17,7 @@ export default function AddSalle() {
     pathBack: '/salles',
     fields: ['title'],
     variableName: 'document',
+    resourceType: 'salle',
   });
   return <div>{rendrer}</div>;
 }

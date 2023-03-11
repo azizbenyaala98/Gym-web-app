@@ -16,6 +16,7 @@ export default function CoachAdd() {
     pathBack: '/coaches',
     fields: ['fullname', 'email', 'address', 'picture', 'specialty'],
     variableName: 'document',
+    resourceType: 'coach',
   });
   return <div>{rendrer}</div>;
 }

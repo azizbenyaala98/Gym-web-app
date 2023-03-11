@@ -10,7 +10,7 @@ export default function Input(props) {
         flexDirection: 'column',
       }}
     >
-      <span>{label}</span>
+      <span style={{ textTransform: 'capitalize' }}>{label}</span>
       <TextField name={name} variant="outlined" value={form[name]} {...rest} />
     </div>
   );

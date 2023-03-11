@@ -3,6 +3,7 @@ import logo from '../assets/logo.png';
 import { Link } from 'react-scroll';
 import '../pages/Landing/Landing.css';
 import { useNavigate } from 'react-router';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Navbar({ isPage }) {
   const navigate = useNavigate();
@@ -60,6 +61,14 @@ function Navbar({ isPage }) {
             {' '}
             SignIn
           </a>
+        </li>
+
+        <li>
+          <RouterLink to="/shop/products"> Shop</RouterLink>
+        </li>
+
+        <li>
+          <RouterLink to="/cart"> Cart</RouterLink>
         </li>
       </ul>
     </nav>
